@@ -23,10 +23,10 @@ function CustomTooltip({active, payload, label}){
              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'   
             }}>
                 <p><strong>Data:</strong> {formatarData(label)}</p>
-                <p><strong>Corrente Instantânea:</strong> {dados.inst_curr ?? '---'} mAh</p>
-                <p><strong>Capacidade:</strong> {dados.battery_level ?? '---'} %</p>
-                <p><strong>Temperatura da Bateria:</strong> {dados.temp_bat ?? '---'} °C</p>
-                <p><strong>Temperatura da CPU:</strong> {dados.temp_cpu ?? '---'} °C</p>
+                <p><strong>Corrente Instantânea(Instant Current):</strong> {dados.inst_curr ?? '---'} mAh</p>
+                <p><strong>Capacidade(Capacity):</strong> {dados.battery_level ?? '---'} %</p>
+                <p><strong>Temperatura da Bateria(Battery Temperature):</strong> {dados.temp_bat ?? '---'} °C</p>
+                <p><strong>Temperatura da CPU(CPU Temperature):</strong> {dados.temp_cpu ?? '---'} °C</p>
             </div>
         );
     }

@@ -8,6 +8,8 @@ import {
     YAxis,
     Tooltip,
     ResponsiveContainer,
+    AreaChart,
+    Area,
 } from 'recharts'
 
 import CustomTooltip from './CustomTooltip'
@@ -18,6 +20,7 @@ function Battery({data}) {
     if(data.length === 0){
         return <p>Atualizando o Gráfico da Corrente..</p>
     }
+    console.log('exemplo de linha de dadoos:', data[0]);
 
     //formatação
     const formatTimestamp = (ts) => {
@@ -50,6 +53,29 @@ function Battery({data}) {
                     dot={false}
                     />
                 </LineChart>
+            </ResponsiveContainer>
+
+            <h3> Nível da Bateria</h3>
+            <ResponsiveContainer width = '100%' height={300}>
+                <AreaChart data= {data}>
+                    <XAxis
+                    dataKey="timestamp"
+                    tickFormatter={formatTimestamp}
+                    //minTickGap={50}
+                    />
+                    <YAxis
+                    domain={[0,100]}
+                    label={{value: 'Bateria(%)', angle: -90, position: 'insideLeft'}}
+                    />
+                    <Tooltip content ={<CustomTooltip />} />
+
+                    <Area 
+                    type="monotone"
+                    dataKey="battery_level"
+                    stroke='#8884d8'
+                    fill='#8884d8'
+                    />
+                </AreaChart>
             </ResponsiveContainer>
 
         </div>
