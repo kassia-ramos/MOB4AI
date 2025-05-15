@@ -18,7 +18,7 @@ function Dashboard(){
 
             const dadosMesclados = batteryData.map(batteryItem => {
                 const temperaturaCorrespondente = temperatureData.find(tempItem =>
-                    Math.abs(tempItem.timestamp - batteryItem.timestamp) < 1000
+                    Math.abs(tempItem.timestamp - batteryItem.timestamp) < 10000    //os dados são unidos com até 10s de diferença entre timestamps
                 );
                 return {
                     ...batteryItem,

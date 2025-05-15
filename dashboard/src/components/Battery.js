@@ -24,7 +24,8 @@ function Battery({data}) {
 
     //formatação
     const formatTimestamp = (ts) => {
-        return new Date(ts).toLocaleString();
+        const date = new Date(ts);
+        return `${date.toLocaleDateString('pt-BR')} - ${date.toLocaleTimeString('pt-BR')}`;
     };
 
     //const latestData = batteryData.length > 0 ? batteryData[0]: null;
@@ -41,7 +42,7 @@ function Battery({data}) {
                     />
 
                     <YAxis
-                    label={{value: 'Corrente (mAh)', angle: -90, position: 'insideleft'}}
+                    label={{value: 'Corrente (mAh)', angle: -90, position: 'insideLeft'}}
                     />
 
                     <Tooltip content={<CustomTooltip/>} />
@@ -61,12 +62,13 @@ function Battery({data}) {
                     <XAxis
                     dataKey="timestamp"
                     tickFormatter={formatTimestamp}
-                    //minTickGap={50}
+                    minTickGap={50}
                     />
                     <YAxis
                     domain={[0,100]}
                     label={{value: 'Bateria(%)', angle: -90, position: 'insideLeft'}}
                     />
+
                     <Tooltip content ={<CustomTooltip />} />
 
                     <Area 

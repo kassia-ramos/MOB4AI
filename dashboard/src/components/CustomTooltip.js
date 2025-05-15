@@ -25,8 +25,8 @@ function CustomTooltip({active, payload, label}){
                 <p><strong>Data:</strong> {formatarData(label)}</p>
                 <p><strong>Corrente Instantânea(Instant Current):</strong> {dados.inst_curr ?? '---'} mAh</p>
                 <p><strong>Capacidade(Capacity):</strong> {dados.battery_level ?? '---'} %</p>
-                <p><strong>Temperatura da Bateria(Battery Temperature):</strong> {dados.temp_bat ?? '---'} °C</p>
-                <p><strong>Temperatura da CPU(CPU Temperature):</strong> {dados.temp_cpu ?? '---'} °C</p>
+                <p><strong>Temperatura da Bateria(Battery Temperature):</strong> {dados.temp_bat != null ? `${(dados.temp_bat / 1000).toFixed(1)}  C°`:  '---' }</p>
+                <p><strong>Temperatura da CPU(CPU Temperature):</strong> {dados.temp_cpu != null ? `${(dados.temp_cpu / 1000).toFixed(1)}  C°` :  '---'}</p>
             </div>
         );
     }
