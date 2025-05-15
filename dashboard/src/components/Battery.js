@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
-import axios from 'axios';
-import React, {useState} from 'react';
-
+//import { useEffect } from 'react';
+//import axios from 'axios';
+import React from 'react';
 import {
     LineChart,
     Line,
@@ -11,19 +10,14 @@ import {
     ResponsiveContainer,
 } from 'recharts'
 
-function Battery() {
-    const [batteryData, setBatteryData]= useState([]);
+import CustomTooltip from './CustomTooltip'
 
-    useEffect(() =>{
-        axios.get('/battery')
-        .then(response =>{
-            console.log('Dados da  API', response.data);
-            setBatteryData(response.data);
-        })
-        .catch(error => {
-            console.error('erro', error);
-        });
-    }, []); //vetor vazio para rodar só uma vez
+//recebe da base unificada
+function Battery({data}) {
+
+    if(data.length === 0){
+        return <p>Atualizando o Gráfico da Corrente..</p>
+    }
 
     //formatação
     const formatTimestamp = (ts) => {
@@ -35,36 +29,28 @@ function Battery() {
     return (
         <div>
             <h3>Corrente Instantânea da Bateria</h3>
+            <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={data}>
+                    <XAxis
+                    dataKey="timestamp"
+                    tickFormatter={formatTimestamp}
+                    minTickGap={50}
+                    />
 
-            {batteryData.length === 0 && <p>Atualizando gráfico</p>}
+                    <YAxis
+                    label={{value: 'Corrente (mAh)', angle: -90, position: 'insideleft'}}
+                    />
 
-            {batteryData.length > 0 && (
-                <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={batteryData}>
-                        <XAxis
-                        dataKey="timestamp"
-                        tickFormatter={formatTimestamp}
-                        minTickGap={50}
-                        />
+                    <Tooltip content={<CustomTooltip/>} />
 
-                        <YAxis
-                        label={{value: 'Corrente (mAh)', angle: -90, position: 'insideleft'}}
-                        />
-
-                        <Tooltip
-                        labelFormatter={(label) => `Hora: ${formatTimestamp(label)}`}
-                        formatter={(value) => [`${value} mAh`, 'Corrente']}
-                        />
-
-                        <Line
-                        type="monotone"
-                        dataKey="inst_curr"
-                        stroke='#8884d8'
-                        dot={false}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
-            )}
+                    <Line
+                    type="monotone"
+                    dataKey="inst_curr"
+                    stroke='#82ca9d'
+                    dot={false}
+                    />
+                </LineChart>
+            </ResponsiveContainer>
 
         </div>
     );

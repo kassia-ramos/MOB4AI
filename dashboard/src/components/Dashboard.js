@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Battery from "./battery";
+import Battery from "./Battery";
 import Temperature from "./Temperature"
 
 function Dashboard(){
