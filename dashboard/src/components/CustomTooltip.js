@@ -1,8 +1,12 @@
 import React from 'react';
 
-function CustomTooltip({active, payload, label}){
+function CustomTooltip({active, payload, label, onHover}){
     if (active && payload && payload.length > 0){
         const dados = payload[0].payload;
+
+        if(onHover){
+            onHover(dados);
+        }
 
     const formatarData = (ts) => {
         const data = new Date(ts);
